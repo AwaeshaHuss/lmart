@@ -1,0 +1,46 @@
+{
+  "appTitle": "My App",
+  "greeting": "Hello, {name}!",
+  "@greeting": {
+    "description": "A greeting message with a name placeholder",
+    "placeholders": {
+      "name": {}
+    }
+  },
+  "userProfileTitle": "User Profile",
+  "logout": "Logout",
+  "nameLabel": "Name",
+  "nameValidationError": "Enter your name",
+  "emailLabel": "Email",
+  "emailValidationError": "Enter your email",
+  "emailInvalidError": "Enter a valid email",
+  "updateProfileButton": "Update Profile",
+  "profileUpdatedSuccess": "Profile updated successfully!",
+  "signInTitle": "Sign In",
+  "signUpTitle": "Sign Up",
+  "passwordLabel": "Password",
+  "passwordValidationError": "Enter your password",
+  "passwordLengthError": "Password must be at least 6 characters",
+  "confirmPasswordLabel": "Confirm Password",
+  "confirmPasswordValidationError": "Confirm your password",
+  "passwordMismatchError": "Passwords do not match",
+  "googleSignIn": "Google Sign In",
+  "cartTitle": "Cart",
+  "cartEmptyMessage": "Your cart is empty",
+  "checkoutButton": "Checkout and Pay",
+  "paymentSuccess": "Payment Success!",
+  "productDetailsTitle": "Product Details",
+  "addToCartButton": "Add to Cart",
+  "productAddedToCart": "{productName} added to cart!",
+  "@productAddedToCart": {
+    "description": "Message shown when a product is added to the cart",
+    "placeholders": {
+      "productName": {}
+    }
+  },
+  "searchProductsTitle": "Search Products",
+  "searchHint": "Search by name or description",
+  "cancelButton": "Cancel",
+  "productsTitle": "Products",
+  "noProductsAvailable": "No products available"
+}

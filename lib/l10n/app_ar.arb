@@ -1,0 +1,46 @@
+{
+  "appTitle": "تطبيقي",
+  "greeting": "مرحبًا، {name}!",
+  "@greeting": {
+    "description": "رسالة ترحيب مع اسم المستخدم",
+    "placeholders": {
+      "name": {}
+    }
+  },
+  "userProfileTitle": "ملف المستخدم",
+  "logout": "تسجيل الخروج",
+  "nameLabel": "الاسم",
+  "nameValidationError": "الرجاء إدخال اسمك",
+  "emailLabel": "البريد الإلكتروني",
+  "emailValidationError": "الرجاء إدخال بريدك الإلكتروني",
+  "emailInvalidError": "الرجاء إدخال بريد إلكتروني صحيح",
+  "updateProfileButton": "تحديث الملف",
+  "profileUpdatedSuccess": "تم تحديث الملف بنجاح!",
+  "signInTitle": "تسجيل الدخول",
+  "signUpTitle": "التسجيل",
+  "passwordLabel": "كلمة المرور",
+  "passwordValidationError": "الرجاء إدخال كلمة المرور",
+  "passwordLengthError": "يجب أن تكون كلمة المرور على الأقل 6 أحرف",
+  "confirmPasswordLabel": "تأكيد كلمة المرور",
+  "confirmPasswordValidationError": "الرجاء تأكيد كلمة المرور",
+  "passwordMismatchError": "كلمات المرور غير متطابقة",
+  "googleSignIn": "تسجيل الدخول باستخدام جوجل",
+  "cartTitle": "عربة التسوق",
+  "cartEmptyMessage": "عربة التسوق فارغة",
+  "checkoutButton": "الدفع والإنهاء",
+  "paymentSuccess": "تمت عملية الدفع بنجاح!",
+  "productDetailsTitle": "تفاصيل المنتج",
+  "addToCartButton": "إضافة إلى العربة",
+  "productAddedToCart": "تمت إضافة {productName} إلى العربة!",
+  "@productAddedToCart": {
+    "description": "رسالة تظهر عند إضافة منتج إلى العربة",
+    "placeholders": {
+      "productName": {}
+    }
+  },
+  "searchProductsTitle": "بحث المنتجات",
+  "searchHint": "ابحث بالاسم أو الوصف",
+  "cancelButton": "إلغاء",
+  "productsTitle": "المنتجات",
+  "noProductsAvailable": "لا توجد منتجات متاحة"
+}

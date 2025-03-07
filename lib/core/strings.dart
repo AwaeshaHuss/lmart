@@ -1,0 +1,3 @@
+const stripKey = 'pk_test_51QzlJN4DFgFZNFkrVn80idwt6DpxUYOgg15WSjLox2jnwMklVqXwmCGcJN3fFTVrSBoCpPyU3F9KA0kxp2PKxgO000fn0KtF2A';
+const stripSecret = 'sk_test_51QzlJN4DFgFZNFkrruG1xIKvmp6S7CrCK3QFycsZryvzH6WxIO4r6b48k7AwoCFMVmPtzBBYSfMBoAUgJobufiPz007IeLjean';
+const appTitle = 'lMart';
