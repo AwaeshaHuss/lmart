@@ -1,4 +1,4 @@
-# Mini E-Commerce App
+# lmart Mini E-Commerce App
 
 ## Overview
 This project is a **mini e-commerce app** that provides essential shopping functionalities, including user authentication, product listing, cart management, and payment integration. The app is built using **Flutter** and leverages **Firebase** for backend services.
