@@ -7,7 +7,6 @@ import 'package:lmart/core/data/firebase_service.dart';
 import 'package:lmart/core/data/models/product.dart';
 import 'package:lmart/core/fonts/app_fonts.dart';
 import 'package:lmart/core/utils.dart';
-import 'package:lmart/features/auth/presentation/screens/profile_screen.dart';
 import 'package:lmart/features/product/presentation/screens/product_details_screen.dart';
 
 class ProductListingScreen extends StatefulWidget {

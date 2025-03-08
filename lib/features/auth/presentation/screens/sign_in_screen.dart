@@ -9,7 +9,7 @@ import 'package:lmart/features/auth/presentation/screens/signup_screen.dart';
 import 'package:lmart/features/product/presentation/widgets/bottom_nav_bar.dart';
 
 class SignInScreen extends StatefulWidget {
-  const SignInScreen({Key? key}) : super(key: key);
+  const SignInScreen({super.key});
 
   @override
   State<SignInScreen> createState() => _SignInScreenState();

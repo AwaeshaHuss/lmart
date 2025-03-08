@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:lmart/config/providers/bottom_nav_bar_provider.dart'; // Import the BottomNavBarProvider
 import 'package:lmart/core/colors/app_colors.dart';
 import 'package:lmart/core/utils.dart';
