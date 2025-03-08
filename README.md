@@ -43,14 +43,8 @@ This project is a **mini e-commerce app** that provides essential shopping funct
 ### 2. **Localization**
 - Supports multiple languages using the **intl** package.
 
-### 3. **Maps Integration**
-- **Google Maps** to display user location and nearby stores.
-
 ### 4. **Image Editing**
 - Users can pick and crop profile pictures using **image_picker** and **image_cropper**.
-
-### 5. **In-App Reviews**
-- Allows users to submit feedback using **in_app_review**.
 
 ---
 
@@ -89,7 +83,7 @@ This project is a **mini e-commerce app** that provides essential shopping funct
 ---
 
 ## Architecture & Design Decisions
-- **Uses Clean Architecture principles** for better code maintainability.
+- **Uses Custom Clean Architecture principles** for better code maintainability.
 - **Provider** is used for state management to separate concerns.
 - **Firestore is chosen** for real-time updates and scalability.
 
@@ -105,6 +99,6 @@ This project is a **mini e-commerce app** that provides essential shopping funct
 ## Contact
 For any questions or feedback, feel free to reach out:
 
-- **Email**: your-email@example.com
-- **GitHub**: [your-github-profile](https://github.com/your-github-profile)
+- **Email**: h.awaesha97@gmail.com
+- **Phone**: 00962790707653
 
