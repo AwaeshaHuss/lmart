@@ -93,6 +93,7 @@ This project is a **mini e-commerce app** that provides essential shopping funct
 - Full source code hosted on **GitHub**.
 - **README.md** with setup and project details.
 - Proper code documentation and comments.
+- **Release APK** https://www.transfernow.net/dl/20250308pmxSidhQ
 
 ---
 
