@@ -68,8 +68,8 @@ This project is a **mini e-commerce app** that provides essential shopping funct
 ### Steps to Run the App
 1. **Clone the Repository**:
    ```bash
-   git clone https://github.com/your-repo/mini-ecommerce-app.git
-   cd mini-ecommerce-app
+   [git clone https://github.com/your-repo/mini-ecommerce-app.git](https://github.com/AwaeshaHuss/lmart.git)
+   cd lmart
    ```
 2. **Install Dependencies**:
    ```bash
