@@ -51,10 +51,9 @@ This project is a **mini e-commerce app** that provides essential shopping funct
 ## Tech Stack
 - **State Management**: `provider`
 - **JSON Parsing**: `json_serializable` and `json_annotation`
-- **Backend Services**: Firebase Authentication, Firestore, Firebase Messaging
+- **Backend Services**: Firebase Authentication, Firestore, FirebaseStorage, Firebase Messaging
 - **Payment Processing**: Stripe
 - **Image Handling**: cached_network_image, image_picker, image_cropper
-- **Maps**: google_maps_flutter
 
 ---
 
