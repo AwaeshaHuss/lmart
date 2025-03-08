@@ -1,12 +1,13 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:lmart/config/providers/bottom_nav_bar_provider.dart';
 import 'package:lmart/core/colors/app_colors.dart';
 import 'package:lmart/core/data/models/cart_item.dart';
 import 'package:lmart/core/data/models/product.dart';
 import 'package:lmart/core/data/firebase_service.dart';
 import 'package:lmart/core/utils.dart';
-import 'package:lmart/features/product/presentation/screens/cart_screen.dart';
+import 'package:lmart/features/product/presentation/widgets/bottom_nav_bar.dart';
 
 class ProductDetailsScreen extends StatefulWidget {
   final Product product;
@@ -39,7 +40,8 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
           Text(getLoc(context).productAddedToCart(widget.product.name))
           ),
         );
-        Navigator.push(context, MaterialPageRoute(builder: (context) => CartScreen(),));
+        BottomNavBarProvider.read(context).setSelectedIndex(1);
+       await Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => BottomNavBar()));
       }
     } catch (e) {
       setState(() {

@@ -1,8 +1,13 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class ProfileProvider with ChangeNotifier {
+
+  static ProfileProvider watch(context) => Provider.of<ProfileProvider>(context);
+  static ProfileProvider read(context) => Provider.of<ProfileProvider>(context, listen: false);
+
   bool _isLoading = false;
   String? _errorMessage;
   File? _profileImage;

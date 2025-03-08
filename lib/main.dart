@@ -33,6 +33,7 @@ void main() async {
   ErrorWidget.builder = (FlutterErrorDetails details) {
     return CustomErrorWidget(details: details);
   };
+  // Provider.debugCheckInvalidValueType = null;
   runApp(const MainApp());
 }
 

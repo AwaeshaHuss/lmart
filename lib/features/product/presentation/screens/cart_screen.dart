@@ -148,6 +148,7 @@ class _CartScreenState extends State<CartScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: Text(getLoc(context).cartTitle),
         centerTitle: false,
         elevation: 0,

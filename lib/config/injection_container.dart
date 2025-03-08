@@ -1,4 +1,5 @@
 import 'package:get_it/get_it.dart';
+import 'package:lmart/config/providers/bottom_nav_bar_provider.dart';
 import 'package:lmart/config/providers/locale_provider.dart';
 import 'package:lmart/config/providers/profile_provider.dart';
 
@@ -14,6 +15,7 @@ void init() async{
   // sl.registerFactory(() => PostBloc(getAllPostsUseCase: sl()));
   sl.registerFactory(() => LocaleProvider());
   sl.registerFactory(() => ProfileProvider());
+  sl.registerFactory(() => BottomNavBarProvider());
 
   //* UseCase
 

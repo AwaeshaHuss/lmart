@@ -9,7 +9,6 @@ import 'package:lmart/core/data/models/user_profile.dart';
 import 'package:lmart/core/fonts/app_fonts.dart';
 import 'package:lmart/core/utils.dart';
 import 'dart:io';
-
 import 'package:provider/provider.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -26,9 +25,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
-  bool _isLoading = false;
-  String? _errorMessage;
-  File? _profileImage;
 
   @override
   void initState() {
@@ -37,15 +33,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 
   Future<void> _loadUserProfile() async {
-    setState(() => _isLoading = true);
+    final profileProvider = ProfileProvider.read(context);
+    
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+    profileProvider.setLoading(true);
+    });
 
     try {
       User? user = _auth.currentUser;
       if (user == null) {
-        setState(() {
-          _errorMessage = "User not logged in";
-          _isLoading = false;
-        });
+        profileProvider.setErrorMessage("User not logged in");
+        profileProvider.setLoading(false);
         return;
       }
 
@@ -60,24 +58,24 @@ class _ProfileScreenState extends State<ProfileScreen> {
         // If profile image is available, load it (you can later store the image URL in Firestore)
       }
     } catch (e) {
-      setState(() => _errorMessage = e.toString());
+      profileProvider.setErrorMessage(e.toString());
     } finally {
-      setState(() => _isLoading = false);
+      profileProvider.setLoading(false);
     }
   }
 
   Future<void> _updateUserProfile() async {
     if (!_formKey.currentState!.validate()) return;
 
-    setState(() => _isLoading = true);
+    final profileProvider =
+        Provider.of<ProfileProvider>(context, listen: false);
+    profileProvider.setLoading(true);
 
     try {
       User? user = _auth.currentUser;
       if (user == null) {
-        setState(() {
-          _errorMessage = "User not logged in";
-          _isLoading = false;
-        });
+        profileProvider.setErrorMessage("User not logged in");
+        profileProvider.setLoading(false);
         return;
       }
 
@@ -98,139 +96,141 @@ class _ProfileScreenState extends State<ProfileScreen> {
       );
       // Navigator.pop(context);
     } catch (e) {
-      setState(() => _errorMessage = e.toString());
+      profileProvider.setErrorMessage(e.toString());
     } finally {
-      setState(() => _isLoading = false);
+      profileProvider.setLoading(false);
     }
   }
 
-  @override
-  Widget build(BuildContext context) {
-    return Consumer<ProfileProvider>(
-      builder: (context, prfile, child) {
-        return Scaffold(
-          resizeToAvoidBottomInset: true,
-          appBar: AppBar(
-            title: Text(getLoc(context).userProfileTitle),
-            centerTitle: false,
-            elevation: 0,
-            actions: [
-              Padding(
-                padding: const EdgeInsetsDirectional.only(end: 8.0),
-                child: IconButton.outlined(
-                    onPressed: () async {
-                      await FirebaseService().signOut(context);
-                    },
-                    icon: Icon(Icons.logout)),
-              )
-            ],
+@override
+Widget build(BuildContext context) {
+  final locale = LocaleProvider.read(context);
+
+  return Scaffold(
+    resizeToAvoidBottomInset: true,
+    appBar: AppBar(
+      automaticallyImplyLeading: false,
+      title: Text(getLoc(context).userProfileTitle),
+      centerTitle: false,
+      elevation: 0,
+      actions: [
+        Padding(
+          padding: const EdgeInsetsDirectional.only(end: 8.0),
+          child: IconButton.outlined(
+            onPressed: () async {
+              await FirebaseService().signOut(context);
+            },
+            icon: Icon(Icons.logout),
           ),
-          body: _isLoading
-              ? const Center(
-                  child: CircularProgressIndicator(
+        )
+      ],
+    ),
+    body: Consumer<ProfileProvider>(
+      builder: (context, profileProvider, child) {
+        return profileProvider.isLoading
+            ? const Center(
+                child: CircularProgressIndicator(
                   strokeWidth: 1,
                   color: AppColors.primaryColor,
                 ))
-              : Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Form(
-                    key: _formKey,
-                    child: SingleChildScrollView(
-                      child: Column(
-                        children: [
-                          // Profile Image Section
-                          GestureDetector(
-                            onTap: () async {
-                              File? newImage = await pickAndCropImage(context);
-                              if (newImage != null) {
-                                setState(() {
-                                  _profileImage = newImage;
-                                });
-                              }
-                            },
-                            child: CircleAvatar(
-                              radius: 60,
-                              backgroundColor: AppColors.text_1Color,
-                              backgroundImage: _profileImage != null
-                                  ? FileImage(_profileImage!)
-                                  : null,
-                              child: _profileImage == null
-                                  ? const Icon(
-                                      Icons.camera_alt,
-                                      color: AppColors.white_1,
-                                    )
-                                  : null,
-                            ),
-                          ),
-                          const SizedBox(height: 45),
-                          if (_errorMessage != null)
-                            Padding(
-                              padding: const EdgeInsets.only(bottom: 16),
-                              child: Text(
-                                _errorMessage!,
-                                style: const TextStyle(color: AppColors.red),
-                              ),
-                            ),
-                          TextFormField(
-                            textInputAction: TextInputAction.next,
-                            style: AppFonts.proximaNova12Regular,
-                            controller: _nameController,
-                            decoration: InputDecoration(
-                                labelText: getLoc(context).nameLabel),
-                            validator: (value) => value!.isEmpty
-                                ? getLoc(context).nameValidationError
+            : Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Form(
+                  key: _formKey,
+                  child: SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        // Profile Image Section
+                        GestureDetector(
+                          onTap: () async {
+                            File? newImage = await pickAndCropImage(context);
+                            if (newImage != null) {
+                              profileProvider.setProfileImage(newImage);
+                            }
+                          },
+                          child: CircleAvatar(
+                            radius: 60,
+                            backgroundColor: AppColors.text_1Color,
+                            backgroundImage: profileProvider.profileImage != null
+                                ? FileImage(profileProvider.profileImage!)
+                                : null,
+                            child: profileProvider.profileImage == null
+                                ? const Icon(
+                                    Icons.camera_alt,
+                                    color: AppColors.white_1,
+                                  )
                                 : null,
                           ),
-                          const SizedBox(height: 16),
-                          TextFormField(
-                            style: AppFonts.proximaNova12Regular,
-                            controller: _emailController,
-                            decoration: InputDecoration(
-                                labelText: getLoc(context).emailLabel),
-                            keyboardType: TextInputType.emailAddress,
-                            validator: (value) {
-                              if (value!.isEmpty) return 'Enter your email';
-                              if (!RegExp(r'^[^@]+@[^@]+\.[^@]+')
-                                  .hasMatch(value)) {
-                                return 'Enter a valid email';
-                              }
-                              return null;
-                            },
+                        ),
+                        const SizedBox(height: 45),
+                        if (profileProvider.errorMessage != null)
+                          Padding(
+                            padding: const EdgeInsets.only(bottom: 16),
+                            child: Text(
+                              profileProvider.errorMessage!,
+                              style: const TextStyle(color: AppColors.red),
+                            ),
                           ),
-                          const SizedBox(height: 24),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Spacer(flex: 2),
-                              ElevatedButton(
-                                onPressed: _updateUserProfile,
-                                child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Text(
-                                    getLoc(context).updateProfileButton,
-                                    style: AppFonts.proximaNova16Medium,
-                                  ),
+                        TextFormField(
+                          textInputAction: TextInputAction.next,
+                          style: AppFonts.proximaNova12Regular,
+                          controller: _nameController,
+                          decoration: InputDecoration(
+                              labelText: getLoc(context).nameLabel),
+                          validator: (value) => value!.isEmpty
+                              ? getLoc(context).nameValidationError
+                              : null,
+                        ),
+                        const SizedBox(height: 16),
+                        TextFormField(
+                          style: AppFonts.proximaNova12Regular,
+                          controller: _emailController,
+                          decoration: InputDecoration(
+                              labelText: getLoc(context).emailLabel),
+                          keyboardType: TextInputType.emailAddress,
+                          validator: (value) {
+                            if (value!.isEmpty) return 'Enter your email';
+                            if (!RegExp(r'^[^@]+@[^@]+\.[^@]+')
+                                .hasMatch(value)) {
+                              return 'Enter a valid email';
+                            }
+                            return null;
+                          },
+                        ),
+                        const SizedBox(height: 24),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Spacer(flex: 2),
+                            ElevatedButton(
+                              onPressed: _updateUserProfile,
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Text(
+                                  getLoc(context).updateProfileButton,
+                                  style: AppFonts.proximaNova16Medium,
                                 ),
                               ),
-                              Spacer(),
-                              IconButton(
-                                  onPressed: () {
-                                   if (getLoc(context).localeName == 'ar') {
-                                     LocaleProvider.read(context).changeLocale(Locale('en'));
-                                   } else {
-                                     LocaleProvider.read(context).changeLocale(Locale('ar'));
-                                   }
-                                  },
-                                  icon: Icon(Icons.language))
-                            ],
-                          ),
-                        ],
-                      ),
+                            ),
+                            Spacer(),
+                            IconButton(
+                              onPressed: () {
+                                if (getLoc(context).localeName == 'ar') {
+                                  locale.changeLocale(Locale('en'));
+                                } else {
+                                  locale.changeLocale(Locale('ar'));
+                                }
+                              },
+                              icon: Icon(Icons.language),
+                            )
+                          ],
+                        ),
+                      ],
                     ),
                   ),
                 ),
-        );
+              );
       },
-    );
-  }
-}
+    ),
+  );
+}}

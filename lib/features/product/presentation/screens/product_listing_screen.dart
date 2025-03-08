@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:lmart/config/cache/cache_helper.dart';
+import 'package:lmart/config/providers/bottom_nav_bar_provider.dart';
 import 'package:lmart/core/colors/app_colors.dart';
 import 'package:lmart/core/data/firebase_service.dart';
 import 'package:lmart/core/data/models/product.dart';
@@ -42,6 +43,7 @@ class _ProductListingScreenState extends State<ProductListingScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: Text(getLoc(context).productsTitle),
         centerTitle: false,
         elevation: 0,
@@ -50,10 +52,11 @@ class _ProductListingScreenState extends State<ProductListingScreen> {
             padding: const EdgeInsetsDirectional.only(end: 8.0),
             child: IconButton.outlined(
               onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => ProfileScreen()),
-                );
+                BottomNavBarProvider.read(context).setSelectedIndex(2);
+                // Navigator.push(
+                //   context,
+                //   MaterialPageRoute(builder: (context) => ProfileScreen()),
+                // );
               },
               icon: const Icon(Icons.person),
             ),
