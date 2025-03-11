@@ -4,7 +4,9 @@
   "@greeting": {
     "description": "رسالة ترحيب مع اسم المستخدم",
     "placeholders": {
-      "name": {}
+      "name": {
+      "type": "Object"
+    }
     }
   },
   "userProfileTitle": "ملف المستخدم",
@@ -35,7 +37,9 @@
   "@productAddedToCart": {
     "description": "رسالة تظهر عند إضافة منتج إلى العربة",
     "placeholders": {
-      "productName": {}
+      "productName": {
+      "type": "Object"
+    }
     }
   },
   "searchProductsTitle": "بحث المنتجات",

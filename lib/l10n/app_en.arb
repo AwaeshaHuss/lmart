@@ -4,7 +4,9 @@
   "@greeting": {
     "description": "A greeting message with a name placeholder",
     "placeholders": {
-      "name": {}
+      "name": {
+      "type": "Object"
+    }
     }
   },
   "userProfileTitle": "User Profile",
@@ -35,7 +37,9 @@
   "@productAddedToCart": {
     "description": "Message shown when a product is added to the cart",
     "placeholders": {
-      "productName": {}
+      "productName": {
+      "type": "Object"
+    }
     }
   },
   "searchProductsTitle": "Search Products",
